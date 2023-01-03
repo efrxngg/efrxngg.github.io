@@ -106,13 +106,14 @@ const Technologie = ({ name, className }) => {
 }
 
 const Projects = () => {
+  console.log(import.meta.env)
   const [repos, setRepos] = useState([])
   useEffect(() => {
     fetch("https://api.github.com/user/repos?per_page=6&sort=pinned", {
       method: "GET",
       headers: {
         "Accept": "application/vnd.github+json",
-        "Authorization": `Bearer ${import.meta.env.VITE_TOKEN_GITHUB}`
+        "Authorization": `Bearer ${import.meta.env.VITE_API_TOKEN_GITHUB}`
       }
     })
       .then(response => response.json())
