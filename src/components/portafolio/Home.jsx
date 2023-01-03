@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 export const Home = () => {
-
   return (
     <>
       <Header />
@@ -15,7 +14,7 @@ export const Home = () => {
         <Content />
 
         {/* proyectos */}
-        {/* <Projects /> */}
+        <Projects />
 
         {/* Contacto */}
         <Contact />
@@ -113,7 +112,7 @@ const Projects = () => {
       method: "GET",
       headers: {
         "Accept": "application/vnd.github+json",
-        "Authorization": "Bearer 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"
+        "Authorization": `Bearer ${import.meta.env.VITE_TOKEN_GITHUB}`
       }
     })
       .then(response => response.json())
