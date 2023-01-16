@@ -1,8 +1,7 @@
 import { useState } from "react";
-import NavLinkSelect from "./NavLinkSelect"
 import { VscMenu } from "react-icons/vsc"
 import { RxSlash } from "react-icons/rx"
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 export const Header = () => {
   const [navbarOpen, setNavbarOpen] = useState(false)
@@ -54,9 +53,8 @@ export const Header = () => {
                   sm:text-sm
                 "
                   maxLength={30}
-                  placeholder="Search"
+                  placeholder="Buscar"
                   onChange={search}
-
                 />
 
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-primary">
@@ -111,22 +109,22 @@ const Options = () => {
      px-10
     ">
 
-    <NavLinkSelect
-      className=""
-      to="/services"
-    >
-      <span className="mr-6 py-5 hover:text-gray-400">Proyectos</span>
-    </NavLinkSelect>
-
-    <NavLinkSelect
-      className=""
-      to="/services"
-    >
-      <span className="mr-6 py-5 hover:text-gray-400">Servicios</span>
-    </NavLinkSelect>
-
+    <OptionNavLink to="/proyectos">Proyectos</OptionNavLink>
+    <OptionNavLink to="/tecnologias">Tecnologias</OptionNavLink>
+    <OptionNavLink to="/redes">Redes Sociales</OptionNavLink>
 
   </ul>
+}
+
+const OptionNavLink = (props) => {
+  const location = useLocation()
+  return (
+    <NavLink state={{location}}
+      {...props}
+    >
+      <span className="mx-4 italic">{props.children}</span>
+    </NavLink >
+  )
 }
 
 export const Footer = () => {

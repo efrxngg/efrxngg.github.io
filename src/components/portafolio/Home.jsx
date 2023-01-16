@@ -1,19 +1,20 @@
 import { Footer, Header } from '../util/Common'
 import '../../css/App.css'
 import { TypeAnimation } from 'react-type-animation'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { Scrollbars } from 'react-custom-scrollbars-2';
 
 export const Home = () => {
   return (
-    <>
+    <Scrollbars style={{ "height": "100vh", "backgroundColor": "white" }}>
       <Header />
 
       <main className="bg-neutral-900 text-white font-mono">
         {/* Contenido Principal */}
         <Content />
 
-        {/* proyectos */}
+        {/* proyectos github*/}
         <Projects />
 
         {/* Contacto */}
@@ -21,7 +22,7 @@ export const Home = () => {
       </main>
 
       <Footer />
-    </>
+    </Scrollbars>
   );
 }
 
@@ -86,7 +87,7 @@ const TechnoligiesAndFrameworks = () => {
         <Technologie name={"JAVASCRIPT"} className=" hover:bg-yellow-400 hover:text-black" />
         <Technologie name={"GIT"} className=" hover:bg-orange-400 hover:text-black" />
       </div>
-      <NavLink to={"/services"}>Mas</NavLink>
+      <NavLink to={"/tecnologias"}>Mas</NavLink>
     </>
   )
 }
@@ -114,7 +115,7 @@ const Projects = () => {
       }
     })
       .then(response => response.json())
-      .then(data => { console.log(data); return data }) //peek
+      // .then(data => { console.log(data); return data }) //peek
       .then(repos => { setRepos(repos) })
   }, [])
 
@@ -125,7 +126,7 @@ const Projects = () => {
       <div className='grid grid-cols-2 lg:grid-cols-6'>
         {repos.map(repo => <ProjectCard key={repo.id} project={repo} />)}
       </div>
-      <NavLink to="/services" className="px-3 flex flex-row-reverse">Mas</NavLink>
+      <a href={"https://github.com/efrxngg"} target="_blank" className="px-3 flex flex-row-reverse" rel="noreferrer">Mas</a>
     </>
   )
 }
@@ -167,7 +168,7 @@ const Contact = () => {
             <div className='col-start-2 w-full h-full flex items-left justify-end'>
               <button
                 type='submit'
-                className='col-start-2 mt-6 py-3 px-10 w-fit border border-green-400 text-green-400 mb-1 hover:border-white hover:text-white'>
+                className='col-start-2 mt-6 py-3 px-10 w-fit border border-slate-100 text-slate-400 mb-1 hover:border-blue-400 hover:text-blue-400'>
                 Enviar Mensaje!
               </button>
             </div>
@@ -192,7 +193,7 @@ const RedesSociales = () => {
         <RedSocialCard name={"Facebook"} />
         <RedSocialCard name={"Intagram"} />
         <RedSocialCard name={"Twiter"} />
-        <RedSocialCard name={"Mas?"} />
+        <NavLink to="/redes" className="border border-neutral-400 flex items-center justify-center py-14">Mas</NavLink>
       </div>
     </>
   )
@@ -200,13 +201,13 @@ const RedesSociales = () => {
 
 const RedSocialCard = ({ name, link }) => {
   return (
-    <a
-      href={"https://chat.openai.com/chat"}
+    <Link
+      to={link}
       className='border border-neutral-400 flex items-center justify-center py-14'
       type="button"
     >
       <div className=''>
         {name}
       </div>
-    </a>)
+    </Link>)
 }
