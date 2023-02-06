@@ -4,6 +4,7 @@ import { TypeAnimation } from 'react-type-animation'
 import { Link, NavLink } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { Scrollbars } from 'react-custom-scrollbars-2';
+import { RxClipboardCopy } from 'react-icons/rx'
 
 export const Home = () => {
   return (
@@ -168,11 +169,36 @@ const Contact = () => {
             <div className='col-start-2 w-full h-full flex items-left justify-end'>
               <button
                 type='submit'
-                className='col-start-2 mt-6 py-3 px-10 w-fit border border-slate-100 text-slate-400 mb-1 hover:border-blue-400 hover:text-blue-400'>
+                className='col-start-2 mt-6 py-3 px-10 w-fit border border-slate-100 text-slate-400 mb-1 hover:border-blue-400 hover:text-blue-400'
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
                 Enviar Mensaje!
               </button>
             </div>
           </form>
+
+          <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+            id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog relative w-auto pointer-events-none">
+              <div
+                className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+                <div
+                  className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+                  <h5 className="text-xl font-medium leading-normal text-gray-800" id="exampleModalLabel">Proximamente...</h5>
+                  <button type="button"
+                    className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                    data-bs-dismiss="modal" aria-label="Close" />
+                </div>
+                <div className="modal-body relative p-4 text-black">
+                  Lo siento, la pagina aun esta en construccion por lo que esta funcionalidad aun no esta disponible
+                  si deseas enviarme un correo puedes hacerlo a
+                  <span className='flex justify-center items-center' id='contact'>efrenpgc2602@gmail.com<RxClipboardCopy className='cursor-pointer' onClick={copiarTexto} /> </span>
+                </div>
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -181,6 +207,10 @@ const Contact = () => {
       </div>
     </div>
   )
+}
+
+function copiarTexto() {
+  navigator.clipboard.writeText(document.getElementById("contact").innerText)
 }
 
 const RedesSociales = () => {
