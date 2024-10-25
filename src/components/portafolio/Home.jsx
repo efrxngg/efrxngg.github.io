@@ -104,7 +104,7 @@ const Technologie = ({ name, className }) => {
 const Projects = () => {
   const p1 = "github_"
   const p2 = "pat_"
-  const p3 = "11AVEGXBQ0VIknu7fgmPCy_QiaOuzADz6oKmE2xmV959OV9D1eh1Rwe5FIyK8VrGeLRKBADXGFMgT8Qfnv"
+  const p3 = "11AVEGXBQ0BQkLvrmPYxOi_TSQ3IGgJDyw8KnEfvXrCOzcu3I3tu6y9dHXF3sO8guHY632NR2LPbTo0jf1"
   const [repos, setRepos] = useState([])
   useEffect(() => {
     fetch("https://api.github.com/user/repos?per_page=6&sort=pinned", {
