@@ -8,7 +8,7 @@ import { RxClipboardCopy } from 'react-icons/rx'
 
 export const Home = () => {
   return (
-    <Scrollbars style={{ "height": "100vh", "backgroundColor": "white" }}>
+    <Scrollbars style={{ "height": "100vh", "backgroundColor": "#171717" }}>
       <Header />
 
       <main className="bg-neutral-900 text-white font-mono">
@@ -102,22 +102,19 @@ const Technologie = ({ name, className }) => {
 }
 
 const Projects = () => {
-  const p1 = "github_"
-  const p2 = "pat_"
-  const p3 = "11AVEGXBQ0nOOLJFmkRry0_fir4IP8VCx0OtFEKz7NEhPp3SSFwZ2rOVyp4ETKfD1oZQOGZ74CBjOElCSS"
   const [repos, setRepos] = useState([])
   useEffect(() => {
-    fetch("https://api.github.com/user/repos?per_page=6&sort=pinned", {
+    // Endpoint publico: no necesita token (limite de 60 peticiones/hora por IP)
+    fetch("https://api.github.com/users/efrxngg/repos?per_page=6&sort=updated", {
       method: "GET",
       headers: {
-        "Accept": "application/vnd.github+json",
-        "Authorization": `Bearer ${p1 + p2 + p3}`
-        // "X-GitHub-Api-Version": "2022-11-28"
+        "Accept": "application/vnd.github+json"
       }
     })
       .then(response => response.json())
-      // .then(data => { console.log(data); return data }) //peek
-      .then(repos => { setRepos(repos) })
+      // si se supera el limite la API devuelve un objeto de error, no una lista
+      .then(repos => { if (Array.isArray(repos)) setRepos(repos) })
+      .catch(() => setRepos([]))
   }, [])
 
   return (
